@@ -1,23 +1,214 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Home</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <!--
-      Need a visual blank slate?
-      Remove all code in `styles.css`!
-    -->
-    <link rel="stylesheet" href="styles.css" />
-    <script type="module" src="script.js"></script>
-  </head>
-  <body>
-    <nav>
-      <a href="/" aria-current="page">Home</a>
-      <a href="/page2.html">Other page</a>
-    </nav>
-    <main>
-      <h1>Home page</h1>
-    </main>
-  </body>
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>مدونة الاتصالات العربية — الصفحة الرئيسية</title>
+  <meta name="description" content="منصة عربية لمقالات وشرح تقنيات الاتصالات: 5G، الألياف البصرية، إنترنت الأشياء، الأمن الشبكي والمزيد." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0f172a; --panel:#0b1224; --text:#e5e7eb; --muted:#94a3b8; --accent:#38bdf8; --border:#1f2a44; --link:#7dd3fc; --ok:#22c55e; --warn:#f59e0b;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0;font-family:'Cairo',system-ui,Segoe UI,Roboto,Noto Sans Arabic,Arial; background:
+      radial-gradient(1200px 1200px at 100% -10%, rgba(56,189,248,.08), transparent 60%),
+      radial-gradient(900px 900px at -10% 110%, rgba(34,197,94,.06), transparent 50%),
+      var(--bg); color:var(--text); line-height:1.8;}
+    a{color:var(--link);text-decoration:none}
+    .container{max-width:1100px;margin:0 auto;padding:20px}
+    header{position:sticky;top:0;z-index:10;background:rgba(11,18,36,.7);backdrop-filter:blur(10px);border-bottom:1px solid var(--border)}
+    .nav{display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .brand{display:flex;align-items:center;gap:10px;padding:10px 0}
+    .logo{width:34px;height:34px;border-radius:12px;background:conic-gradient(from 180deg,var(--accent),transparent 60%);border:1px solid var(--border)}
+    .brand h1{font-size:1.15rem;margin:0}
+    .menu{display:flex;gap:14px;align-items:center}
+    .menu a{padding:8px 10px;border-radius:10px}
+    .menu a:hover{background:rgba(125,211,252,.08)}
+    .search{display:flex;gap:8px;align-items:center}
+    .search input{background:#0a1020;border:1px solid var(--border);border-radius:12px;padding:10px 12px;color:var(--text);min-width:220px}
+    .cta{background:linear-gradient(90deg,var(--accent),#60a5fa);color:#03101a;border:none;border-radius:12px;padding:10px 14px;font-weight:700}
+
+    /* Hero */
+    .hero{padding:48px 0}
+    .hero-grid{display:grid;grid-template-columns:1.4fr .9fr;gap:24px}
+    .hero .card{background:linear-gradient(180deg, rgba(148,163,184,0.08), rgba(148,163,184,0));border:1px solid var(--border);border-radius:18px;padding:22px}
+    .kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:18px}
+    .kpi{border:1px dashed var(--border);border-radius:14px;padding:12px;text-align:center}
+    .kpi .n{font-size:1.6rem;font-weight:700}
+
+    /* Sections */
+    .section{margin:28px 0}
+    .section h2{font-size:1.25rem;margin:0 0 12px}
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    .card{background:linear-gradient(180deg, rgba(148,163,184,0.06), rgba(148,163,184,0));border:1px solid var(--border);border-radius:16px;padding:16px}
+    .tag{display:inline-block;font-size:.8rem;color:#03202b;background:rgba(125,211,252,.8);border-radius:999px;padding:4px 10px;margin-inline-start:4px}
+
+    .topics .chip{display:inline-block;border:1px solid var(--border);border-radius:999px;padding:8px 12px;margin:6px 6px 0 0;background:rgba(125,211,252,.06)}
+
+    /* Newsletter */
+    .newsletter{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:center}
+    .newsletter form{display:flex;gap:8px}
+    .newsletter input{flex:1;background:#0a1020;border:1px solid var(--border);border-radius:12px;padding:12px;color:var(--text)}
+    .newsletter button{border:none;border-radius:12px;padding:12px 16px;background:linear-gradient(90deg,var(--accent),#60a5fa);font-weight:700}
+
+    footer{margin:40px 0 10px;border-top:1px solid var(--border);padding-top:12px;color:var(--muted);display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+
+    @media (max-width:900px){
+      .hero-grid{grid-template-columns:1fr}
+      .grid{grid-template-columns:1fr}
+      .newsletter{grid-template-columns:1fr}
+      .search input{min-width:140px}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <div class="brand">
+        <div class="logo" aria-hidden="true"></div>
+        <h1>مدونة الاتصالات العربية</h1>
+      </div>
+      <nav class="menu" aria-label="روابط أساسية">
+        <a href="#latest">الجديد</a>
+        <a href="#guides">شروحات</a>
+        <a href="#topics">الموضوعات</a>
+        <a href="/terms">الشروط والأحكام</a>
+      </nav>
+      <div class="search" role="search">
+        <input type="search" placeholder="ابحث عن 5G، الألياف، IoT…" aria-label="بحث" />
+        <button class="cta">ابدأ القراءة</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero-grid">
+        <div class="card">
+          <h2 style="font-size:1.8rem;margin:.2rem 0 .6rem">كل ما تحتاجه عن شبكات الاتصالات — بالعربي وبأسلوب مبسّط</h2>
+          <p style="color:var(--muted);margin:0 0 14px">نغطي أحدث التطورات في 5G/6G، الألياف البصرية، إنترنت الأشياء، أمن الشبكات، واللوائح التنظيمية في المنطقة العربية.</p>
+          <div class="kpis">
+            <div class="kpi"><div class="n">+120</div><div>مقال وشرح</div></div>
+            <div class="kpi"><div class="n">+35</div><div>دليل عملي</div></div>
+            <div class="kpi"><div class="n">أسبوعيًّا</div><div>تحديثات</div></div>
+          </div>
+          <div style="margin-top:16px;display:flex;gap:10px;flex-wrap:wrap">
+            <a class="cta" href="#latest">اقرأ الجديد</a>
+            <a class="cta" href="#newsletter" style="background:linear-gradient(90deg,#22c55e,#86efac)">اشترك بالنشرة</a>
+          </div>
+        </div>
+        <div class="card">
+          <h3 style="margin:.2rem 0 10px">الموضوعات الرائجة الآن</h3>
+          <div class="topics">
+            <span class="chip">5G Standalone</span>
+            <span class="chip">Open RAN</span>
+            <span class="chip">Fiber to the Home</span>
+            <span class="chip">Private LTE/5G</span>
+            <span class="chip">NB-IoT</span>
+            <span class="chip">VoLTE / VoNR</span>
+            <span class="chip">أمن الشبكات</span>
+            <span class="chip">تنظيم الطيف</span>
+          </div>
+          <p style="color:var(--muted);margin-top:12px">استكشف أدناه أدلّة مبسطة وورش تطبيقية.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Latest Posts -->
+    <section id="latest" class="section">
+      <h2>أحدث المقالات</h2>
+      <div class="grid">
+        <article class="card">
+          <div class="tag">دليل</div>
+          <h3>كيف تعمل الشبكات الخاصة 5G في المصانع؟</h3>
+          <p class="excerpt" style="color:var(--muted)">نظرة عملية على حالات الاستخدام، البنية، ومتطلبات الطيف للشبكات الخاصة.</p>
+          <a href="#" aria-label="اقرأ المزيد">اقرأ المزيد →</a>
+        </article>
+        <article class="card">
+          <div class="tag">تحليل</div>
+          <h3>Open RAN: أين وصل النضج في 2025؟</h3>
+          <p class="excerpt" style="color:var(--muted)">مراجعة أحدث الإعلانات والمعايير والتجارب التجارية في المنطقة.</p>
+          <a href="#">اقرأ المزيد →</a>
+        </article>
+        <article class="card">
+          <div class="tag">أساسيات</div>
+          <h3>VoNR مقابل VoLTE: الفرق ببساطة</h3>
+          <p class="excerpt" style="color:var(--muted)">متى تُستخدم كل تقنية؟ وما المتطلبات من طرف الشبكة والجهاز؟</p>
+          <a href="#">اقرأ المزيد →</a>
+        </article>
+      </div>
+    </section>
+
+    <!-- Guides -->
+    <section id="guides" class="section">
+      <h2>شروحات مختارة</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>ضبط جودة الخدمة (QoS) في شبكات 5G</h3>
+          <p style="color:var(--muted)">مفاهيم QoS Flow و PDU Session وكيفية تطبيق السياسات.</p>
+          <a href="#">ابدأ الشرح →</a>
+        </div>
+        <div class="card">
+          <h3>الألياف إلى المنزل: من الصندوق للراوتر</h3>
+          <p style="color:var(--muted)">FTTH خطوة بخطوة للمستخدم والمهندس.</p>
+          <a href="#">اقرأ الدليل →</a>
+        </div>
+        <div class="card">
+          <h3>أمن الشبكات الخلوية</h3>
+          <p style="color:var(--muted)">أفضل الممارسات لحماية نوى الشبكات والواجهات.</p>
+          <a href="#">تعرّف أكثر →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section id="newsletter" class="section card newsletter">
+      <div>
+        <h2>انضم إلى نشرتنا الأسبوعية</h2>
+        <p style="color:var(--muted)">ملخّصات سريعة لأهم الأخبار والتحليلات في عالم الاتصالات مباشرة إلى بريدك.</p>
+      </div>
+      <form onsubmit="event.preventDefault(); alert('تم الاشتراك بنجاح (نموذج تجريبي)');">
+        <input type="email" placeholder="بريدك الإلكتروني" required aria-label="بريد إلكتروني" />
+        <button type="submit">اشترك الآن</button>
+      </form>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section">
+      <h2>أسئلة شائعة</h2>
+      <div class="card">
+        <details>
+          <summary>هل المحتوى مناسب للمبتدئين؟</summary>
+          <p>نعم، نبدأ بالأساسيات مع رسوم توضيحية ثم نتدرج لمستوى متقدم.</p>
+        </details>
+        <details>
+          <summary>هل تنشرون أخبارًا يومية؟</summary>
+          <p>ننشر تحديثات أسبوعية مركّزة بدل الضجيج اليومي.</p>
+        </details>
+        <details>
+          <summary>هل يمكن إعادة استخدام الرسومات؟</summary>
+          <p>يسمح بالاقتباس مع ذكر المصدر وعدم التعديل إلا بإذن.</p>
+        </details>
+      </div>
+    </section>
+  </main>
+
+  <footer class="container">
+    <span>© <span id="y"></span> مدونة الاتصالات العربية — جميع الحقوق محفوظة.</span>
+    <span>
+      <a href="/about">من نحن</a> ·
+      <a href="/privacy">الخصوصية</a> ·
+      <a href="/terms">الشروط والأحكام</a>
+    </span>
+  </footer>
+
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+</body>
 </html>
